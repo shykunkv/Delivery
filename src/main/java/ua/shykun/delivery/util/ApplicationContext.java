@@ -1,7 +1,5 @@
 package ua.shykun.delivery.util;
 
-/**
- * Created by Admin on 1/25/16.
- */
-public interface ApplicationContext {
+public interface ApplicationContext  {
+    Object getBean(String beanName) throws Exception;
 }

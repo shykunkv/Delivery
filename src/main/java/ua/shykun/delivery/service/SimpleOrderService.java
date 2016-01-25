@@ -15,9 +15,11 @@ public class SimpleOrderService implements OrderService {
     private final OrderRepository orderRepository;
     private final PizzaService pizzaService;
     
-    public SimpleOrderService() throws InstantiationException, IllegalAccessException {
-        orderRepository = (OrderRepository) ServiceLocator.getInstance().createObject("orderRepository");
-        pizzaService = (PizzaService) ServiceLocator.getInstance().createObject("pizzaService");
+    public SimpleOrderService(
+            OrderRepository orderRepository,
+            PizzaService pizzaService) {
+        this.orderRepository = orderRepository;
+        this.pizzaService = pizzaService;
     }
     
     @Override

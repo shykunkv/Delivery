@@ -8,8 +8,9 @@ public class SimplePizzaService implements PizzaService {
 
     private final PizzaRepository pizzaRepository;
 
-    public SimplePizzaService() throws InstantiationException, IllegalAccessException {
-        pizzaRepository = (PizzaRepository) ServiceLocator.getInstance().createObject("pizzaRepository");
+    public SimplePizzaService(PizzaRepository pizzaRepository) throws InstantiationException, IllegalAccessException {
+        //pizzaRepository = (PizzaRepository) ServiceLocator.getInstance().createObject("pizzaRepository");
+        this.pizzaRepository = pizzaRepository;
     }
     
     @Override
