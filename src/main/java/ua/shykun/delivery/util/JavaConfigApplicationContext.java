@@ -1,7 +1,10 @@
 package ua.shykun.delivery.util;
 
+import ua.shykun.delivery.annotations.AfterCreate;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.util.HashMap;
@@ -67,12 +70,25 @@ public class JavaConfigApplicationContext implements ApplicationContext {
 
         public void afterConstruct() {
             Class<?> clazz = bean.getClass();
+
             try {
-                Method method = clazz.getMethod("init");
-                method.invoke(bean);
+                Method init = clazz.getMethod("init");
+                init.invoke(bean);
             } catch (Exception ex) {
-                //ex.printStackTrace();
+                //Handle exception
             }
+
+            try {
+                Method[] methods = clazz.getMethods();
+                for (Method method: methods) {
+                    if (method.isAnnotationPresent(AfterCreate.class) && !method.getName().equals("init")) {
+                        method.invoke(bean);
+                    }
+                }
+            } catch (Exception ex) {
+                //Handle exception
+            }
+
         }
 
         public void createProxy() {

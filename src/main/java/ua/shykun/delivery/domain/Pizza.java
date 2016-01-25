@@ -3,7 +3,7 @@ package ua.shykun.delivery.domain;
 
 public class Pizza {
 
-    public enum PizzaType { VEGETARIAN, SEA, MEAT }
+    public enum PizzaType { VEGETARIAN, SEA, MEAT, CHEESE }
 
     private Integer id;
     private String name;
