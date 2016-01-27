@@ -1,5 +1,6 @@
 package ua.shykun.delivery.service;
 
+import ua.shykun.delivery.annotations.Benchmark;
 import ua.shykun.delivery.domain.Customer;
 import ua.shykun.delivery.domain.Order;
 import ua.shykun.delivery.domain.Pizza;
@@ -23,6 +24,7 @@ public class SimpleOrderService implements OrderService {
     }
     
     @Override
+    @Benchmark
     public Order placeNewOrder(Customer customer, Integer... pizzasID) {
         List<Pizza> pizzas = new ArrayList<>();
 

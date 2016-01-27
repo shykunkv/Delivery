@@ -2,9 +2,7 @@ package ua.shykun.delivery.util;
 
 import ua.shykun.delivery.annotations.AfterCreate;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.util.HashMap;
@@ -32,13 +30,12 @@ public class JavaConfigApplicationContext implements ApplicationContext {
 
         BeanBuilder builder = new BeanBuilder(type);
         builder.construct();
-        builder.afterConstruct();
         builder.createProxy();
+        builder.afterConstruct();
         bean = builder.build();
 
         map.put(beanName, bean);
         return bean;
-
     }
 
 
@@ -46,57 +43,66 @@ public class JavaConfigApplicationContext implements ApplicationContext {
 
         Class<?> type;
         Object bean;
+        Object proxy;
 
         public BeanBuilder(Class<?> type) {
             this.type = type;
         }
 
         public void construct() throws Exception {
+
             Constructor<?> constructor = type.getConstructors()[0];
-            Parameter[] parameters = constructor.getParameters();
 
-            if (parameters.length == 0) {
+            if (constructor.getParameters().length == 0) {
                 bean = type.newInstance();
+            } else {
+                bean = constructWithParameters(constructor);
             }
+        }
 
+        public Object constructWithParameters(Constructor<?> constructor) throws Exception {
+            Parameter[] parameters = constructor.getParameters();
             Object[] params = new Object[parameters.length];
             for (int i = 0; i <  params.length; i++) {
-               Parameter param = parameters[i];
-               String className = param.getType().getSimpleName();
-               params[i] = getBean(Character.toLowerCase(className.charAt(0)) + className.substring(1));
+                Parameter param = parameters[i];
+                String className = param.getType().getSimpleName();
+                params[i] = getBean(Character.toLowerCase(className.charAt(0)) + className.substring(1));
             }
-            bean = constructor.newInstance(params);
+            return constructor.newInstance(params);
         }
 
         public void afterConstruct() {
+            try {
+                invokeInit();
+            } catch (Exception ex) {}
+
+            try {
+                invokeAfterCreate();
+            } catch (Exception ex) {}
+        }
+
+        public void invokeInit() throws Exception {
             Class<?> clazz = bean.getClass();
+            Method init = clazz.getMethod("init");
+            init.invoke(bean);
+        }
 
-            try {
-                Method init = clazz.getMethod("init");
-                init.invoke(bean);
-            } catch (Exception ex) {
-                //Handle exception
-            }
-
-            try {
-                Method[] methods = clazz.getMethods();
-                for (Method method: methods) {
-                    if (method.isAnnotationPresent(AfterCreate.class) && !method.getName().equals("init")) {
-                        method.invoke(bean);
-                    }
+        public void invokeAfterCreate() throws Exception {
+            Class<?> clazz = bean.getClass();
+            Method[] methods = clazz.getMethods();
+            for (Method method: methods) {
+                if (method.isAnnotationPresent(AfterCreate.class) && !method.getName().equals("init")) {
+                    method.invoke(bean);
                 }
-            } catch (Exception ex) {
-                //Handle exception
             }
-
         }
 
         public void createProxy() {
-
+            proxy = BenchmarkProxy.checkForBenchmarkAndGetProxy(bean);
         }
 
         public Object build() {
-            return bean;
+            return proxy;
         }
     }
 
