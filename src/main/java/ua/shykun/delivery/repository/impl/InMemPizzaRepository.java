@@ -1,8 +1,10 @@
-package ua.shykun.delivery.repository;
+package ua.shykun.delivery.repository.impl;
 
 import ua.shykun.delivery.annotations.AfterCreate;
 import ua.shykun.delivery.annotations.Benchmark;
 import ua.shykun.delivery.domain.Pizza;
+import ua.shykun.delivery.repository.PizzaRepository;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,7 +13,7 @@ public class InMemPizzaRepository implements PizzaRepository {
 
     private static final Map<Integer, Pizza> pizzas = new HashMap<>();
 
-
+    @Benchmark
     public void init() {
         pizzas.put(1, new Pizza(1, "VEGETARIAN", 10.0, Pizza.PizzaType.VEGETARIAN));
         pizzas.put(2, new Pizza(2, "MEAT", 20.0, Pizza.PizzaType.MEAT));

@@ -1,9 +1,11 @@
 package ua.shykun.delivery.util;
 
-import ua.shykun.delivery.repository.InMemOrderRepository;
-import ua.shykun.delivery.repository.InMemPizzaRepository;
-import ua.shykun.delivery.service.SimpleOrderService;
-import ua.shykun.delivery.service.SimplePizzaService;
+import ua.shykun.delivery.repository.impl.InMemCustomerRepository;
+import ua.shykun.delivery.repository.impl.InMemOrderRepository;
+import ua.shykun.delivery.repository.impl.InMemPizzaRepository;
+import ua.shykun.delivery.service.impl.SimpleCustomerService;
+import ua.shykun.delivery.service.impl.SimpleOrderService;
+import ua.shykun.delivery.service.impl.SimplePizzaService;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,6 +20,8 @@ public class JavaConfig implements Config {
         ifc2Class.put("orderRepository", InMemOrderRepository.class);
         ifc2Class.put("pizzaService", SimplePizzaService.class);
         ifc2Class.put("orderService", SimpleOrderService.class);
+        ifc2Class.put("customerService", SimpleCustomerService.class);
+        ifc2Class.put("customerRepository", InMemCustomerRepository.class);
     }
 
     @Override

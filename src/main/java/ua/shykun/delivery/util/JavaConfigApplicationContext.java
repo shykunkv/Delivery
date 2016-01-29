@@ -1,7 +1,6 @@
 package ua.shykun.delivery.util;
 
 import ua.shykun.delivery.annotations.AfterCreate;
-
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
@@ -22,7 +21,6 @@ public class JavaConfigApplicationContext implements ApplicationContext {
 
         Object bean = map.get(beanName);
         Class<?> type = config.getImpl(beanName);
-
 
         if (bean != null) {
             return bean;
@@ -50,7 +48,6 @@ public class JavaConfigApplicationContext implements ApplicationContext {
         }
 
         public void construct() throws Exception {
-
             Constructor<?> constructor = type.getConstructors()[0];
 
             if (constructor.getParameters().length == 0) {

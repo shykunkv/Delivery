@@ -1,31 +1,20 @@
 package ua.shykun.delivery.domain;
 
-import java.util.List;
+import java.util.Date;
+import java.util.Map;
 
 
 public class Order {
 
+    public enum OrderStatus {NEW, IN_PROGRESS, CANCELED, DONE};
+
     private Integer id;
+    private Date date;
     private Customer customer;
-    private List<Pizza> pizzas;
-    
-    public Order(int id, Customer customer, List<Pizza> pizzas) {
-        this.id = id;
-        this.customer = customer;
-        this.pizzas = pizzas;
-    }
+    private Map<Pizza, Integer> pizzas;
 
-    public Order(Customer customer, List<Pizza> pizzas) {
-        this.customer = customer;
-        this.pizzas = pizzas;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public Order() {
+        date = new Date();
     }
 
     public Customer getCustomer() {
@@ -36,14 +25,25 @@ public class Order {
         this.customer = customer;
     }
 
-    public List<Pizza> getPizzas() {
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public Map<Pizza, Integer> getPizzas() {
         return pizzas;
     }
 
-    public void setPizzas(List<Pizza> pizzas) {
+    public void setPizzas(Map<Pizza, Integer> pizzas) {
         this.pizzas = pizzas;
     }
-
 
     @Override
     public String toString() {
