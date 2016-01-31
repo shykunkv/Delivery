@@ -15,7 +15,7 @@ public class DeliveryApp {
         ApplicationContext context = new JavaConfigApplicationContext(new JavaConfig());
 
         OrderService orderService = (OrderService) context.getBean("orderService");
-        Order order = orderService.placeNewOrder(2, 1, 5);
+        Order order = orderService.placeNewOrder(null, 1, 5);
 
 
         System.out.println(order);

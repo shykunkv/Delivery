@@ -32,8 +32,8 @@ public class SimpleOrderService implements OrderService {
     }
     
     @Override
-    @Benchmark
-    public Order placeNewOrder(Integer customerID, Integer... pizzasID) {
+    //@Benchmark
+    public Order placeNewOrder(Customer customer, Integer... pizzasID) {
 
 
         Map<Pizza, Integer> pizzas = new HashMap<>();
@@ -44,7 +44,7 @@ public class SimpleOrderService implements OrderService {
         Order order = new Order();
         order.setPizzas(pizzas);
 
-        Customer customer = customerService.find(customerID);
+        //Customer customer = customerService.find(customerID);
         order.setCustomer(customer);
 
         saveOrder(order);
@@ -58,4 +58,5 @@ public class SimpleOrderService implements OrderService {
     private void saveOrder(Order order) {
         orderRepository.save(order);
     }
+
 }

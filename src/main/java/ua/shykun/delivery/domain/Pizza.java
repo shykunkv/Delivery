@@ -10,12 +10,6 @@ public class Pizza {
     private double price;
     private PizzaType type;
 
-    public Pizza(int id, String name, double price, PizzaType type) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.type = type;
-    }
 
     public Pizza(String name, double price, PizzaType type) {
         this.name = name;

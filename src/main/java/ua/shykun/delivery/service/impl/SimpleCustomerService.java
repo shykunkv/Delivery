@@ -6,6 +6,7 @@ import ua.shykun.delivery.service.CustomerService;
 
 
 public class SimpleCustomerService implements CustomerService {
+
     private final CustomerRepository customerRepository;
 
     public SimpleCustomerService(CustomerRepository customerRepository) {
@@ -15,5 +16,10 @@ public class SimpleCustomerService implements CustomerService {
     @Override
     public Customer find(Integer id) {
         return customerRepository.find(id);
+    }
+
+    @Override
+    public Customer create(String name) {
+        return new Customer(name);
     }
 }
