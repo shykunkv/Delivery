@@ -18,15 +18,15 @@ public class SpringDeliveryApp {
                 = new ClassPathXmlApplicationContext(new String[] {"applicationContext.xml"}, repositoryContext);
 
 
-        System.out.println(applicationContext.getParent());
+        //System.out.println(applicationContext.getParent());
 
         Customer customer = applicationContext.getBean("customer", Customer.class);
 
         OrderService orderService = applicationContext.getBean("orderService", OrderService.class);
-        System.out.println(orderService.placeNewOrder(customer, 1, 2, 3));
+        System.out.println(orderService.placeNewOrder(customer, new Integer[] {1, 2, 3}, new Integer[] {2, 2, 1}));
 
-        Customer newCustomer = applicationContext.getBean("newCustomer", Customer.class);
-        System.out.println(newCustomer.getAddresses());
+//      Customer newCustomer = applicationContext.getBean("newCustomer", Customer.class);
+//      System.out.println(newCustomer.getAddresses());
 
         repositoryContext.close();
         applicationContext.close();
