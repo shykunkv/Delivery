@@ -6,7 +6,6 @@ public class Customer {
 
     private Integer id;
     private String name;
-
     private List<Address> addresses;
     private AccumulativeCard accumulativeCard;
 
@@ -51,9 +50,6 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "Customer{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
+        return name + "[" + id + "]";
     }
 }

@@ -6,7 +6,6 @@ import ua.shykun.delivery.domain.orderCost.DiscountManager;
 import java.util.Date;
 import java.util.Map;
 
-
 public class Order {
 
     public enum OrderStatus {NEW, IN_PROGRESS, CANCELED, DONE};
@@ -52,16 +51,16 @@ public class Order {
         this.pizzas = pizzas;
     }
 
+    public double getTotalPrice() {
+        return discountManager.calculateTotalOrderPrice(this);
+    }
+
     public DiscountManager getDiscountManager() {
         return discountManager;
     }
 
     public void setDiscountManager(DiscountManager discountManager) {
         this.discountManager = discountManager;
-    }
-
-    public double getTotalPrice() {
-        return discountManager.calculateTotalOrderPrice(this);
     }
 
     public Integer getId() {
@@ -73,15 +72,18 @@ public class Order {
     }
 
     public void setStatus(OrderStatus status) {
-        this.status = status;
+        if (status.ordinal() >= this.status.ordinal() && !this.status.equals(OrderStatus.CANCELED)) {
+            this.status = status;
+        } else {
+            throw new IllegalArgumentException("Invalid new order status.");
+        }
     }
 
     @Override
     public String toString() {
-        return "Order{" +
-                "id=" + id +
-                ", customer=" + customer +
-                ", pizzas=" + pizzas +
-                '}';
+        return "Order[" + id + ", " +
+                status + " ]:" +
+                ", customer=" + customer.getName() +
+                ", pizzas=" + pizzas;
     }
 }

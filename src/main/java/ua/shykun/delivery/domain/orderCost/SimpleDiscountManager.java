@@ -1,11 +1,13 @@
 package ua.shykun.delivery.domain.orderCost;
 
+import org.springframework.stereotype.Component;
 import ua.shykun.delivery.domain.AccumulativeCard;
 import ua.shykun.delivery.domain.Order;
 import ua.shykun.delivery.domain.Pizza;
 
 import java.util.Map;
 
+@Component
 public class SimpleDiscountManager implements DiscountManager {
 
     private final static int MAX_PIZZA_IN_ORDER = 10;
@@ -13,6 +15,8 @@ public class SimpleDiscountManager implements DiscountManager {
     private final static double BONUS_SIZE_FROM_CARD = 0.1;
     private final static int MIN_PIZZA_TO_DISCOUNT = 4;
     private final static double DISCOUNT_SIZE = 0.3;
+
+    SimpleDiscountManager() {}
 
     @Override
     public double calculateTotalOrderPrice(Order order) {

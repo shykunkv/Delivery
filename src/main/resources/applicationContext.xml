@@ -9,42 +9,30 @@
                            http://www.springframework.org/schema/context/spring-context.xsd">
 
     <context:annotation-config/>
+    <context:component-scan base-package="ua.shykun.delivery.service" />
 
-    <bean id="customerService" class="ua.shykun.delivery.service.impl.SimpleCustomerService" autowire="constructor">
-        <!--<constructor-arg ref="customerRepo" />-->
-    </bean>
+    <context:component-scan base-package="ua.shykun.delivery.domain" />
 
-    <bean name="customer" factory-bean="customerService" factory-method="create">
-        <constructor-arg value="Kostiantyn" />
-    </bean>
+    <!--<bean id="customerService" class="ua.shykun.delivery.service.impl.SimpleCustomerService" autowire="constructor">-->
+        <!--&lt;!&ndash;<constructor-arg ref="customerRepo" />&ndash;&gt;-->
+    <!--</bean>-->
 
-    <bean id="orderService" class="ua.shykun.delivery.service.impl.SimpleOrderService">
-        <lookup-method name="createOrder" bean="order" />
-    </bean>
+    <!--<bean id="orderService" class="ua.shykun.delivery.service.impl.SimpleOrderService">-->
+        <!--<lookup-method name="createOrder" bean="order" />-->
+    <!--</bean>-->
 
-    <bean id="pizzaService" class="ua.shykun.delivery.service.impl.SimplePizzaService" autowire="constructor">
-        <!--<constructor-arg ref="pizzaRepo"/>-->
-    </bean>
+    <!--<bean id="pizzaService" class="ua.shykun.delivery.service.impl.SimplePizzaService" autowire="constructor">-->
+        <!--&lt;!&ndash;<constructor-arg ref="pizzaRepo"/>&ndash;&gt;-->
+    <!--</bean>-->
 
-    <bean name="card" class="ua.shykun.delivery.domain.AccumulativeCard">
-        <constructor-arg value="200"/>
-    </bean>
+    <!--<bean class="ua.shykun.delivery.domain.Address">-->
+        <!--<constructor-arg name="building" value="6"/>-->
+        <!--<constructor-arg name="street" value="Sechenova Street"/>-->
+        <!--<constructor-arg name="city" value="Kyiv"/>-->
+    <!--</bean>-->
 
-    <bean name="newCustomer" class="ua.shykun.delivery.domain.Customer" autowire="byType">
-        <constructor-arg value="Kostiantyn"/>
-        <property name="accumulativeCard" ref="card" />
+    <!--<bean name="order" class="ua.shykun.delivery.domain.Order" scope="prototype"></bean>-->
 
-    </bean>
-
-    <bean class="ua.shykun.delivery.domain.Address">
-        <constructor-arg name="building" value="6"/>
-        <constructor-arg name="street" value="Sechenova Street"/>
-        <constructor-arg name="city" value="Kyiv"/>
-    </bean>
-
-    <bean name="order" class="ua.shykun.delivery.domain.Order" scope="prototype"></bean>
-
-    <bean name="discountManager" class="ua.shykun.delivery.domain.orderCost.SimpleDiscountManager" />
 
 
 </beans>

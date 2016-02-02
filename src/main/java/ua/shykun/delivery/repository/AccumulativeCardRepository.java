@@ -4,4 +4,5 @@ import ua.shykun.delivery.domain.AccumulativeCard;
 
 public interface AccumulativeCardRepository {
     AccumulativeCard find(int id);
+    void update(AccumulativeCard accumulativeCard);
 }

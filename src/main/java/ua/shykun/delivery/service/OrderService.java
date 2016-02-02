@@ -1,8 +1,8 @@
 package ua.shykun.delivery.service;
 
-import ua.shykun.delivery.domain.Customer;
 import ua.shykun.delivery.domain.Order;
+import ua.shykun.delivery.domain.orderCost.DiscountManager;
 
 public interface OrderService {
-    Order placeNewOrder(Customer customer, Integer[] pizzasID, Integer[] pizzaQuantity);
+    Order placeNewOrder(Integer customerID, Integer[] pizzasID, DiscountManager discountManager);
 }

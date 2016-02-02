@@ -10,6 +10,9 @@ public class Pizza {
     private double price;
     private PizzaType type;
 
+    public Pizza() {
+
+    }
 
     public Pizza(String name, double price, PizzaType type) {
         this.name = name;
@@ -51,11 +54,6 @@ public class Pizza {
 
     @Override
     public String toString() {
-        return "Pizza{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", price=" + price +
-                ", type=" + type +
-                '}';
+        return name + "[" + id + ", " + price + ']';
     }
 }

@@ -5,10 +5,13 @@ public class AccumulativeCard {
     private Integer id;
     private double balance;
 
+    public AccumulativeCard() {
+        this.balance = 0.0;
+    }
+
     public AccumulativeCard(double balance) {
         this.balance = balance;
     }
-
 
     public Integer getId() {
         return id;
@@ -26,11 +29,12 @@ public class AccumulativeCard {
         this.balance = balance;
     }
 
+    public void increaseBalance(double balance) {
+        this.balance += balance;
+    }
+
     @Override
     public String toString() {
-        return "AccumulativeCard{" +
-                "id=" + id +
-                ", balance=" + balance +
-                '}';
+        return "Card[" + "balance=" + balance + ']';
     }
 }

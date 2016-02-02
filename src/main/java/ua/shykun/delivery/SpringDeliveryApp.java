@@ -2,9 +2,8 @@ package ua.shykun.delivery;
 
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import ua.shykun.delivery.domain.Customer;
-import ua.shykun.delivery.repository.OrderRepository;
-import ua.shykun.delivery.repository.PizzaRepository;
+import ua.shykun.delivery.domain.Order;
+import ua.shykun.delivery.domain.orderCost.DiscountManager;
 import ua.shykun.delivery.service.OrderService;
 
 public class SpringDeliveryApp {
@@ -18,15 +17,14 @@ public class SpringDeliveryApp {
                 = new ClassPathXmlApplicationContext(new String[] {"applicationContext.xml"}, repositoryContext);
 
 
-        //System.out.println(applicationContext.getParent());
+        OrderService orderService = applicationContext.getBean(OrderService.class);
+        DiscountManager discountManager = applicationContext.getBean(DiscountManager.class);
 
-        Customer customer = applicationContext.getBean("customer", Customer.class);
+        Order order = orderService.placeNewOrder(1, new Integer[] {1, 2, 3, 1, 2}, discountManager);
 
-        OrderService orderService = applicationContext.getBean("orderService", OrderService.class);
-        System.out.println(orderService.placeNewOrder(customer, new Integer[] {1, 2, 3}, new Integer[] {2, 2, 1}));
+        System.out.println(order);
+        System.out.println(order.getTotalPrice());
 
-//      Customer newCustomer = applicationContext.getBean("newCustomer", Customer.class);
-//      System.out.println(newCustomer.getAddresses());
 
         repositoryContext.close();
         applicationContext.close();

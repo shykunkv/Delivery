@@ -1,9 +1,11 @@
 package ua.shykun.delivery.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import ua.shykun.delivery.domain.Customer;
 import ua.shykun.delivery.domain.Order;
 import ua.shykun.delivery.domain.Pizza;
+import ua.shykun.delivery.domain.orderCost.DiscountManager;
 import ua.shykun.delivery.repository.OrderRepository;
 import ua.shykun.delivery.service.CustomerService;
 import ua.shykun.delivery.service.OrderService;
@@ -13,6 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
+@Service
 public class SimpleOrderService implements OrderService {
 
 
@@ -20,7 +23,6 @@ public class SimpleOrderService implements OrderService {
     private final PizzaService pizzaService;
     private final CustomerService customerService;
 
-    //private ApplicationContext applicationContext;
 
     @Autowired
     public SimpleOrderService(
@@ -33,31 +35,30 @@ public class SimpleOrderService implements OrderService {
     }
 
     @Override
-    //@Benchmark
-    public Order placeNewOrder(Customer customer, Integer[] pizzasID, Integer[] pizzaQuantity) {
+    public Order placeNewOrder(Integer customerID, Integer[] pizzasID, DiscountManager discountManager) {
 
         Map<Pizza, Integer> pizzas = new HashMap<>();
-        for (int i = 0; i < pizzasID.length; i++) {
-            pizzas.put(getPizzaByID(pizzasID[i]), pizzaQuantity[i]);
+
+        for (int pizzaID : pizzasID) {
+            Pizza pizza = pizzaService.find(pizzaID);
+            if (pizzas.containsKey(pizza)) {
+                pizzas.put(pizza, pizzas.get(pizza) + 1);
+            } else {
+                pizzas.put(pizza, 1);
+            }
         }
 
-        Order order = createOrder();
+        Order order = new Order();
+        order.setDiscountManager(discountManager);
+
         order.setPizzas(pizzas);
 
-        //Customer customer = customerService.find(customerID);
+        Customer customer = customerService.find(customerID);
         order.setCustomer(customer);
 
-
-        System.out.println(order.getTotalPrice());
         saveOrder(order);
         return order;
     }
-
-
-    protected Order createOrder() {
-        System.out.print("HELLO");
-        return null;
-    };
 
     private Pizza getPizzaByID(Integer id) {
         return pizzaService.find(id);

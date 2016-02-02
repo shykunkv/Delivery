@@ -1,12 +1,13 @@
 package ua.shykun.delivery.repository.impl;
 
+import org.springframework.stereotype.Repository;
 import ua.shykun.delivery.domain.Address;
 import ua.shykun.delivery.repository.AddressRepository;
 
 import java.util.HashMap;
 import java.util.Map;
 
-
+@Repository
 public class InMemAddressRepository implements AddressRepository {
 
     private static final Map<Integer, Address> addresses = new HashMap<>();
