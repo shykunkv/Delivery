@@ -7,36 +7,13 @@
 
     <context:component-scan base-package="ua.shykun.delivery.repository" />
 
-    <!--<bean id="pizzaRepo" class="ua.shykun.delivery.repository.impl.InMemPizzaRepository">-->
-        <!--<constructor-arg name="pizzas">-->
-            <!--<map>-->
-                <!--<entry key="1">-->
-                    <!--<bean class="ua.shykun.delivery.domain.Pizza">-->
-                        <!--<constructor-arg type="java.lang.String" value="Sea"/>-->
-                        <!--<constructor-arg value="200"/>-->
-                        <!--<constructor-arg value="SEA"/>-->
-                    <!--</bean>-->
-                <!--</entry>-->
-                <!--<entry key="2">-->
-                    <!--<bean class="ua.shykun.delivery.domain.Pizza">-->
-                        <!--<constructor-arg type="java.lang.String" value="Meat"/>-->
-                        <!--<constructor-arg value="300"/>-->
-                        <!--<constructor-arg value="MEAT"/>-->
-                    <!--</bean>-->
-                <!--</entry>-->
-                <!--<entry key="3">-->
-                    <!--<bean class="ua.shykun.delivery.domain.Pizza">-->
-                        <!--<constructor-arg type="java.lang.String" value="Vegetarian"/>-->
-                        <!--<constructor-arg value="400"/>-->
-                        <!--<constructor-arg value="VEGETARIAN"/>-->
-                    <!--</bean>-->
-                <!--</entry>-->
-            <!--</map>-->
-        <!--</constructor-arg>-->
-    <!--</bean>-->
-    <!--<bean id="accumulativeRepo" class="ua.shykun.delivery.repository.impl.InMemAccumulativeCardRepository" init-method="init"/>-->
-    <!--<bean id="addressRepo" class="ua.shykun.delivery.repository.impl.InMemAddressRepository" init-method="init"/>-->
-    <!--<bean id="customerRepo" class="ua.shykun.delivery.repository.impl.InMemCustomerRepository" init-method="init" />-->
-    <!--<bean id="orderRepo" class="ua.shykun.delivery.repository.impl.InMemOrderRepository"/>-->
+
+    <bean name="pizzaFactoryBean" class="ua.shykun.delivery.util.PizzaFactoryBean" >
+        <property name="name" value="PizzaName" />
+        <property name="price" value="200" />
+        <property name="type" value="SEA" />
+    </bean>
+
+    <bean class="ua.shykun.delivery.util.BenchmarkBeanPostProccessor"/>
 
 </beans>

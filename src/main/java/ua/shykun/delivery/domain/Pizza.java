@@ -7,14 +7,14 @@ public class Pizza {
 
     private Integer id;
     private String name;
-    private double price;
+    private Double price;
     private PizzaType type;
 
     public Pizza() {
 
     }
 
-    public Pizza(String name, double price, PizzaType type) {
+    public Pizza(String name, Double price, PizzaType type) {
         this.name = name;
         this.price = price;
         this.type = type;
@@ -54,6 +54,6 @@ public class Pizza {
 
     @Override
     public String toString() {
-        return name + "[" + id + ", " + price + ']';
+        return name + "[" + id + ", " + price + ", " + type + ']';
     }
 }

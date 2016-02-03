@@ -1,11 +1,14 @@
 package ua.shykun.delivery.domain;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import ua.shykun.delivery.annotations.MyComponent;
 import ua.shykun.delivery.domain.orderCost.DiscountManager;
 
 import java.util.Date;
 import java.util.Map;
 
+
+@MyComponent
 public class Order {
 
     public enum OrderStatus {NEW, IN_PROGRESS, CANCELED, DONE};
