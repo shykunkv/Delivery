@@ -8,11 +8,11 @@
     <context:component-scan base-package="ua.shykun.delivery.repository" />
 
 
-    <bean name="pizzaFactoryBean" class="ua.shykun.delivery.util.PizzaFactoryBean" >
-        <property name="name" value="PizzaName" />
-        <property name="price" value="200" />
-        <property name="type" value="SEA" />
-    </bean>
+    <!--<bean name="pizzaFactoryBean" class="ua.shykun.delivery.util.PizzaFactoryBean" >-->
+        <!--<property name="name" value="PizzaName" />-->
+        <!--<property name="price" value="200" />-->
+        <!--<property name="type" value="SEA" />-->
+    <!--</bean>-->
 
     <bean class="ua.shykun.delivery.util.BenchmarkBeanPostProccessor"/>
 

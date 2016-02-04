@@ -4,6 +4,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ua.shykun.delivery.domain.Order;
 import ua.shykun.delivery.domain.orderCost.DiscountManager;
+import ua.shykun.delivery.repository.PizzaRepository;
 import ua.shykun.delivery.service.OrderService;
 
 public class SpringDeliveryApp {
@@ -22,16 +23,9 @@ public class SpringDeliveryApp {
 
         Order order = orderService.placeNewOrder(1, new Integer[] {1, 2, 3, 1, 2}, discountManager);
 
-        //System.out.println(order);
-        //System.out.println(order.getTotalPrice());
-
-//        for(String s: applicationContext.getBeanDefinitionNames()) {
-//            System.out.println(s);
-//        }
-
         //System.out.println(applicationContext.getBean("pizzaFactoryBean"));
 
-        System.out.println(applicationContext.getBean("newCustomer"));
+        //System.out.println(applicationContext.getBean("newCustomer"));
 
         repositoryContext.close();
         applicationContext.close();

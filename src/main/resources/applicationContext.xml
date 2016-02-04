@@ -11,6 +11,8 @@
 
     <context:component-scan base-package="ua.shykun.delivery.service" />
 
+    <context:component-scan base-package="ua.shykun.delivery.util.events" />
+
     <context:component-scan base-package="ua.shykun.delivery.domain" >
         <context:include-filter type="annotation" expression="ua.shykun.delivery.annotations.MyComponent"/>
     </context:component-scan>
@@ -21,4 +23,5 @@
     <bean name="newCustomer" class="ua.shykun.delivery.domain.Customer">
         <constructor-arg value="Kostianty"/>
     </bean>
+
 </beans>
