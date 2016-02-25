@@ -12,7 +12,8 @@ public class PizzaFactoryBean implements FactoryBean<Pizza> {
 
     @Override
     public Pizza getObject() throws Exception {
-        return new Pizza(name, price, type);
+        return null;
+        //return new Pizza(name, price, type);
     }
 
     @Override

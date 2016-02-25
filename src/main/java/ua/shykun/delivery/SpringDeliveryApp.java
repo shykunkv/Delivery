@@ -37,10 +37,10 @@ public class SpringDeliveryApp {
         //addressService.save(address);
 
         PizzaService pizzaService = applicationContext.getBean(PizzaService.class);
-        pizzaService.save(new Pizza("Meat pizza", 10.0, Pizza.PizzaType.MEAT));
-        pizzaService.save(new Pizza("Vegetable pizza", 20.0, Pizza.PizzaType.VEGETARIAN));
-        pizzaService.save(new Pizza("Cheese pizza", 30.0, Pizza.PizzaType.CHEESE));
-        pizzaService.save(new Pizza("Sea pizza", 40.0, Pizza.PizzaType.SEA));
+//        pizzaService.save(new Pizza("Meat pizza", 10.0, Pizza.PizzaType.MEAT));
+//        pizzaService.save(new Pizza("Vegetable pizza", 20.0, Pizza.PizzaType.VEGETARIAN));
+//        pizzaService.save(new Pizza("Cheese pizza", 30.0, Pizza.PizzaType.CHEESE));
+//        pizzaService.save(new Pizza("Sea pizza", 40.0, Pizza.PizzaType.SEA));
 
 //        CustomerService customerService = applicationContext.getBean(CustomerService.class);
 //
