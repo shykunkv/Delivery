@@ -1,13 +1,27 @@
 package ua.shykun.delivery.domain;
 
+import javax.persistence.*;
 
+@Entity
+@Table(name = "addresses")
 public class Address {
 
-    private Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "address_id")
+    private Long id;
 
+    @Column(name = "address_building")
     private String building;
+
+    @Column(name = "address_street")
     private String street;
+
+    @Column(name = "address_city")
     private String city;
+
+    public Address() {
+    }
 
     public Address(String building, String street, String city) {
         this.building = building;
@@ -15,11 +29,11 @@ public class Address {
         this.city = city;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

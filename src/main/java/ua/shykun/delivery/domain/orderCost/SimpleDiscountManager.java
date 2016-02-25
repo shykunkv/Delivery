@@ -1,11 +1,11 @@
-package ua.shykun.delivery.domain.orderCost;
+package ua.shykun.delivery.domain.ordercost;
 
 import org.springframework.stereotype.Component;
 import ua.shykun.delivery.domain.AccumulativeCard;
 import ua.shykun.delivery.domain.Order;
-import ua.shykun.delivery.domain.Pizza;
+import ua.shykun.delivery.domain.OrderItem;
 
-import java.util.Map;
+import java.util.List;
 
 @Component
 public class SimpleDiscountManager implements DiscountManager {
@@ -22,23 +22,23 @@ public class SimpleDiscountManager implements DiscountManager {
     public double calculateTotalOrderPrice(Order order) {
         isValdOrder(order);
         if (order.getCustomer().getAccumulativeCard() == null) {
-            return getTotalPrice(order.getPizzas());
+            return getTotalPrice(order.getOrderItems());
         } else {
-            return getTotalPriceWithCard(order.getPizzas(), order.getCustomer().getAccumulativeCard());
+            return getTotalPriceWithCard(order.getOrderItems(), order.getCustomer().getAccumulativeCard());
         }
     }
 
     private void isValdOrder(Order order) {
-        if (order == null || order.getPizzas() == null) {
+        if (order == null || order.getOrderItems() == null) {
             throw new NullPointerException("Invalid order");
         }
 
         int amountOfPizzas = 0;
-        Map<Pizza, Integer> pizzas = order.getPizzas();
+        List<OrderItem> orderItems = order.getOrderItems();
 
 
-        for (Pizza pizza: pizzas.keySet()) {
-            int quantity = pizzas.get(pizza);
+        for (OrderItem orderItem: orderItems) {
+            int quantity = orderItem.getPizzaNum();
             if (quantity <= 0) {
                 throw new IllegalArgumentException("Invalid amount of pizza");
             }
@@ -54,42 +54,41 @@ public class SimpleDiscountManager implements DiscountManager {
         }
     }
 
-    private double getTotalPrice(Map<Pizza, Integer> pizzas) {
+    private double getTotalPrice(List<OrderItem> orderItems) {
         double totalPrice = 0.0;
         double maxPizzaPrice = 0.0;
         int numOfPizzas = 0;
 
-        for (Pizza pizza: pizzas.keySet()) {
-            if (pizza.getPrice() > maxPizzaPrice) {
-                maxPizzaPrice = pizza.getPrice();
-            }
-            numOfPizzas += pizzas.get(pizza);
-            totalPrice += pizzas.get(pizza) * pizza.getPrice();
-
+        for (OrderItem orderItem: orderItems) {
+//            if (.getPrice() > maxPizzaPrice) {
+//                maxPizzaPrice = pizza.getPrice();
+//            }
+            //numOfPizzas += pizzas.get(pizza);
+            totalPrice += orderItem.getPizzaPrice();
         }
 
-        if (numOfPizzas > MIN_PIZZA_TO_DISCOUNT) {
-            totalPrice -= maxPizzaPrice * DISCOUNT_SIZE;
-        }
+//        if (numOfPizzas > MIN_PIZZA_TO_DISCOUNT) {
+//            totalPrice -= maxPizzaPrice * DISCOUNT_SIZE;
+//        }
 
         return totalPrice;
     }
 
-    private double getTotalPriceWithCard(Map<Pizza, Integer> pizzas, AccumulativeCard accumulativeCard) {
-        double priceWithoutCard = getTotalPrice(pizzas);
-        if (Double.compare(accumulativeCard.getBalance(), 0.0) == 0) {
+    private double getTotalPriceWithCard(List<OrderItem> orderItems, AccumulativeCard accumulativeCard) {
+        double priceWithoutCard = getTotalPrice(orderItems);
+//        if (Double.compare(accumulativeCard.getBalance(), 0.0) == 0) {
             return priceWithoutCard;
-        } else {
-            double bonusSize = priceWithoutCard * BONUS_SIZE_FROM_CARD;
-            double maxBonusSize = accumulativeCard.getBalance() * MAX_BONUS_SIZE_FROM_CARD;
-
-            if (Double.compare(bonusSize, maxBonusSize) > 0) {
-                accumulativeCard.setBalance(accumulativeCard.getBalance() - maxBonusSize);
-                return priceWithoutCard - maxBonusSize;
-            } else {
-                accumulativeCard.setBalance(accumulativeCard.getBalance() - bonusSize);
-                return priceWithoutCard - bonusSize;
-            }
-        }
+//        } else {
+//            double bonusSize = priceWithoutCard * BONUS_SIZE_FROM_CARD;
+//            double maxBonusSize = accumulativeCard.getBalance() * MAX_BONUS_SIZE_FROM_CARD;
+//
+//            if (Double.compare(bonusSize, maxBonusSize) > 0) {
+//                accumulativeCard.setBalance(accumulativeCard.getBalance() - maxBonusSize);
+//                return priceWithoutCard - maxBonusSize;
+//            } else {
+//                accumulativeCard.setBalance(accumulativeCard.getBalance() - bonusSize);
+//                return priceWithoutCard - bonusSize;
+//            }
+//        }
     }
 }

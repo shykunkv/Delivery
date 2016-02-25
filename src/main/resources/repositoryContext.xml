@@ -2,18 +2,42 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context.xsd
+                           http://www.springframework.org/schema/tx
+                           http://www.springframework.org/schema/tx/spring-tx.xsd">
+
 
 
     <context:component-scan base-package="ua.shykun.delivery.repository" />
 
+    <tx:annotation-driven transaction-manager="transactionManager"/>
 
-    <!--<bean name="pizzaFactoryBean" class="ua.shykun.delivery.util.PizzaFactoryBean" >-->
-        <!--<property name="name" value="PizzaName" />-->
-        <!--<property name="price" value="200" />-->
-        <!--<property name="type" value="SEA" />-->
-    <!--</bean>-->
 
-    <bean class="ua.shykun.delivery.util.BenchmarkBeanPostProccessor"/>
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="classpath:/postgres.properties"/>
+    </bean>
 
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="${driver}"/>
+        <property name="url" value="${url}"/>
+        <property name="username" value="${user}"/>
+        <property name="password" value="${password}"/>
+        <property name="initialSize" value="5"/>
+    </bean>
+
+
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="persistenceUnitName" value="${persistunit}"/>
+        <property name="dataSource" ref="dataSource"/>
+        <property name="packagesToScan" value="ua.shykun.delivery.domain"/>
+    </bean>
+
+
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
 </beans>

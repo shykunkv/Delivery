@@ -1,4 +1,4 @@
-package ua.shykun.delivery.domain.orderCost;
+package ua.shykun.delivery.domain.ordercost;
 
 
 import ua.shykun.delivery.domain.Order;

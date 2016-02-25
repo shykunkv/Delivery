@@ -2,6 +2,7 @@ package ua.shykun.delivery.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ua.shykun.delivery.domain.Customer;
 import ua.shykun.delivery.repository.CustomerRepository;
 import ua.shykun.delivery.service.CustomerService;
@@ -17,17 +18,14 @@ public class SimpleCustomerService implements CustomerService {
     }
 
     @Override
-    public Customer find(Integer id) {
+    public Customer find(Long id) {
         return customerRepository.find(id);
     }
 
     @Override
+    @Transactional
     public void register(Customer customer) {
         customerRepository.save(customer);
     }
 
-    @Override
-    public Customer findByName(String customerName) {
-        return customerRepository.findByName(customerName);
-    }
 }

@@ -2,6 +2,7 @@ package ua.shykun.delivery.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ua.shykun.delivery.domain.AccumulativeCard;
 import ua.shykun.delivery.repository.AccumulativeCardRepository;
 import ua.shykun.delivery.service.AccumulativeCardService;
@@ -17,13 +18,13 @@ public class SimpleAccumulativeCardService implements AccumulativeCardService {
     }
 
     @Override
-    public AccumulativeCard find(Integer id) {
+    public AccumulativeCard find(Long id) {
         return accumulativeCardRepository.find(id);
     }
 
     @Override
-    public void increaseCardSum(AccumulativeCard accumulativeCard, double bonusSum) {
-        accumulativeCard.increaseBalance(bonusSum);
-        accumulativeCardRepository.update(accumulativeCard);
+    @Transactional
+    public AccumulativeCard save(AccumulativeCard accumulativeCard) {
+        return accumulativeCardRepository.save(accumulativeCard);
     }
 }

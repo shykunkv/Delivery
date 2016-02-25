@@ -1,4 +1,4 @@
-package ua.shykun.delivery.repository.impl;
+package ua.shykun.delivery.repository.impl.inmem;
 
 import org.springframework.stereotype.Repository;
 import ua.shykun.delivery.domain.Customer;
@@ -8,7 +8,6 @@ import javax.annotation.PostConstruct;
 import java.util.HashMap;
 import java.util.Map;
 
-@Repository
 public class InMemCustomerRepository implements CustomerRepository {
 
     private final static Map<Integer, Customer> customers = new HashMap<>();
@@ -20,24 +19,12 @@ public class InMemCustomerRepository implements CustomerRepository {
     }
 
     @Override
-    public Customer find(int id) {
-        return customers.get(id);
+    public Customer save(Customer customer) {
+        return null;
     }
 
     @Override
-    public void save(Customer customer) {
-        customers.put(null, customer);
-    }
-
-    @Override
-    public Customer findByName(String name) {
-        for (Map.Entry<Integer, Customer> entry: customers.entrySet()) {
-            Customer curCustomer = entry.getValue();
-            if (curCustomer.getName().equals(name)) {
-                return curCustomer;
-            }
-        }
-
+    public Customer find(Long id) {
         return null;
     }
 }

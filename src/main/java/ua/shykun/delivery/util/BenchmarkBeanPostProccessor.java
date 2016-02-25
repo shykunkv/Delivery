@@ -15,6 +15,5 @@ public class BenchmarkBeanPostProccessor implements BeanPostProcessor {
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
         Object proxy = BenchmarkProxy.checkForBenchmarkAndGetProxy(bean);
         return proxy;
-
     }
 }

@@ -1,4 +1,4 @@
-package ua.shykun.delivery.repository.impl;
+package ua.shykun.delivery.repository.impl.inmem;
 
 import org.springframework.stereotype.Repository;
 import ua.shykun.delivery.domain.AccumulativeCard;
@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-@Repository
 public class InMemAccumulativeCardRepository implements AccumulativeCardRepository {
 
     private static Map<Integer, AccumulativeCard> accumulativeCards = new HashMap<>();
@@ -22,12 +21,12 @@ public class InMemAccumulativeCardRepository implements AccumulativeCardReposito
     }
 
     @Override
-    public AccumulativeCard find(int id) {
-        return accumulativeCards.get(id);
+    public AccumulativeCard find(Long id) {
+        return null;
     }
 
     @Override
-    public void update(AccumulativeCard accumulativeCard) {
-        throw new UnsupportedOperationException();
+    public AccumulativeCard save(AccumulativeCard accumulativeCard) {
+        return null;
     }
 }

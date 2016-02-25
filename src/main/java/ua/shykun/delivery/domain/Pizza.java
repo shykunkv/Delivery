@@ -1,30 +1,38 @@
 package ua.shykun.delivery.domain;
 
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="pizzas")
 public class Pizza {
 
     public enum PizzaType { VEGETARIAN, SEA, MEAT, CHEESE }
 
-    private Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="pizza_id")
+    private Long id;
+
+    @Column(name="pizza_name")
     private String name;
+
+    @Column(name="pizza_price")
     private Double price;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name="pizza_type")
     private PizzaType type;
 
     public Pizza() {
 
     }
 
-    public Pizza(String name, Double price, PizzaType type) {
-        this.name = name;
-        this.price = price;
-        this.type = type;
-    }
-
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

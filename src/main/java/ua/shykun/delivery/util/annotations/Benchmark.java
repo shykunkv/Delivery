@@ -1,4 +1,4 @@
-package ua.shykun.delivery.annotations;
+package ua.shykun.delivery.util.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

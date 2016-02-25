@@ -1,6 +1,6 @@
 package ua.shykun.delivery.util;
 
-import ua.shykun.delivery.annotations.Benchmark;
+import ua.shykun.delivery.util.annotations.Benchmark;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationHandler;

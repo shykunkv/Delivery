@@ -3,6 +3,6 @@ package ua.shykun.delivery.repository;
 import ua.shykun.delivery.domain.AccumulativeCard;
 
 public interface AccumulativeCardRepository {
-    AccumulativeCard find(int id);
-    void update(AccumulativeCard accumulativeCard);
+    AccumulativeCard find(Long id);
+    AccumulativeCard save(AccumulativeCard accumulativeCard);
 }

@@ -1,12 +1,36 @@
 package ua.shykun.delivery.domain;
 
+import org.hibernate.annotations.*;
+import org.hibernate.annotations.CascadeType;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.List;
 
+@Entity
+@Table(name = "customers")
 public class Customer {
 
-    private Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "customer_id")
+    private Long id;
+
+    @Column(name = "customer_name")
     private String name;
+
+    @ManyToMany
+    @JoinColumn(referencedColumnName = "address_id")
+    @Cascade({CascadeType.PERSIST, CascadeType.MERGE})
+    @Column(name = "customer_addresses")
     private List<Address> addresses;
+
+
+    @OneToOne
+    @JoinColumn(name = "accumulative_card", referencedColumnName = "accumulative_card_id")
+    @Cascade({CascadeType.PERSIST, CascadeType.MERGE})
     private AccumulativeCard accumulativeCard;
 
     public Customer() {}
@@ -31,11 +55,11 @@ public class Customer {
         this.accumulativeCard = accumulativeCard;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

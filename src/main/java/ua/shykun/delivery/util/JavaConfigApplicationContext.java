@@ -1,6 +1,6 @@
 package ua.shykun.delivery.util;
 
-import ua.shykun.delivery.annotations.AfterCreate;
+import ua.shykun.delivery.util.annotations.AfterCreate;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;

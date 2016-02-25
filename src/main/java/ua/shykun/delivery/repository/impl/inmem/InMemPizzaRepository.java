@@ -1,16 +1,15 @@
-package ua.shykun.delivery.repository.impl;
+package ua.shykun.delivery.repository.impl.inmem;
 
-import org.springframework.stereotype.Repository;
-import ua.shykun.delivery.annotations.AfterCreate;
-import ua.shykun.delivery.annotations.Benchmark;
+import ua.shykun.delivery.util.annotations.Benchmark;
 import ua.shykun.delivery.domain.Pizza;
 import ua.shykun.delivery.repository.PizzaRepository;
 
 import javax.annotation.PostConstruct;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-@Repository
+
 public class InMemPizzaRepository implements PizzaRepository {
 
     private Map<Integer, Pizza> pizzas = new HashMap<>();
@@ -28,7 +27,17 @@ public class InMemPizzaRepository implements PizzaRepository {
 
     @Override
     @Benchmark
-    public Pizza find(Integer id) {
+    public Pizza find(Long id) {
         return pizzas.get(id);
+    }
+
+    @Override
+    public Pizza save(Pizza pizza) {
+        return pizzas.get(pizza);
+    }
+
+    @Override
+    public List<Pizza> getAll() {
+        return null;
     }
 }

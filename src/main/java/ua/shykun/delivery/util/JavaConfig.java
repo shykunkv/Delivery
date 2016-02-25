@@ -1,8 +1,8 @@
 package ua.shykun.delivery.util;
 
-import ua.shykun.delivery.repository.impl.InMemCustomerRepository;
-import ua.shykun.delivery.repository.impl.InMemOrderRepository;
-import ua.shykun.delivery.repository.impl.InMemPizzaRepository;
+import ua.shykun.delivery.repository.impl.inmem.InMemCustomerRepository;
+import ua.shykun.delivery.repository.impl.inmem.InMemOrderRepository;
+import ua.shykun.delivery.repository.impl.inmem.InMemPizzaRepository;
 import ua.shykun.delivery.service.impl.SimpleCustomerService;
 import ua.shykun.delivery.service.impl.SimpleOrderService;
 import ua.shykun.delivery.service.impl.SimplePizzaService;

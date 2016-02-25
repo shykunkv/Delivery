@@ -1,8 +1,19 @@
 package ua.shykun.delivery.domain;
 
+import javax.persistence.*;
+import javax.persistence.Table;
+
+
+@Entity
+@Table(name = "accumulative_cards")
 public class AccumulativeCard {
 
-    private Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "accumulative_card_id")
+    private Long id;
+
+    @Column(name = "accumulative_card_balance")
     private double balance;
 
     public AccumulativeCard() {
@@ -13,11 +24,11 @@ public class AccumulativeCard {
         this.balance = balance;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
