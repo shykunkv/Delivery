@@ -12,9 +12,6 @@
 
     <context:component-scan base-package="ua.shykun.delivery.web"/>
 
-    <mvc:view-controller path="/" view-name="index"/>
-
-
     <!--<bean id="convertionService" class="org.springframework.context.support.ConversionServiceFactoryBean">-->
         <!--<property name="converters">-->
             <!--<set>-->

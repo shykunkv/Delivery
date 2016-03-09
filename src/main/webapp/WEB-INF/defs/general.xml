@@ -33,11 +33,11 @@
         <!--<put-attribute name="current" value="personalinfo" cascade="true" />-->
     <!--</definition>-->
 
-    <!--<definition name="hello" extends="common">-->
-        <!--<put-attribute name="title" value="Hello" />-->
-        <!--<put-attribute name="body" value="/WEB-INF/jsp/hello.jsp" />-->
-        <!--<put-attribute name="current" value="hello" />-->
-    <!--</definition>-->
+    <definition name="new_pizza" extends="common">
+        <put-attribute name="title" value="New pizza" />
+        <put-attribute name="body" value="/WEB-INF/jsp/new_pizza.jsp" />
+        <put-attribute name="current" value="new_pizza" />
+    </definition>
 
     <definition name="menu" extends="common">
         <put-attribute name="title" value="Pizzas" />

@@ -2,6 +2,7 @@
 
 <center>
 <h1>Login page</h1>
+    <br>
 <form class="form-signin" action="<spring:url value="/login" />" method="POST">
     <h2 class="form-signin-heading">Please sign in</h2>
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>

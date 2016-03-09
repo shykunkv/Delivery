@@ -1,9 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <center>
-<br>
-
-    <h3>PizzaDelivery Menu</h3>
-
+    <br>
+    <h1>Menu page</h1>
+    <br>
 
     <table  border="1">
         <thead>
@@ -12,8 +13,10 @@
                 <th width="150">Name</th>
                 <th width="150">Type</th>
                 <th width="75">Price</th>
-                <th width="50"></th>
-                <th width="50"></th>
+                <sec:authorize access="hasRole('ROLE_ADMIN')">
+                    <th width="50"></th>
+                    <th width="50"></th>
+                </sec:authorize>
             </tr>
         </thead>
 
@@ -24,6 +27,7 @@
                     <td>${pizza.name}</td>
                     <td>${pizza.type}</td>
                     <td>${pizza.price}</td>
+                    <sec:authorize access="hasRole('ROLE_ADMIN')">
                     <td>
                         <form action="edit" method="post">
                             <input type="hidden" name="id" value="${pizza.id}" />
@@ -36,12 +40,14 @@
                             <input type="submit" name="delete" value="delete"/>
                         </form>
                     </td>
+                    </sec:authorize>
                 </tr>
             </c:forEach>
         </tbody>
     </table>
-
-    </br>
-    <a href="/jsp/create">Create new pizza</a>
+    <sec:authorize access="hasRole('ROLE_ADMIN')">
+        </br>
+        <a href="<spring:url value="/jsp/create"/>"/>Create new pizza</a>
+    </sec:authorize>
 </center>
 

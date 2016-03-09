@@ -2,7 +2,7 @@
 <center>
 <body>
     <h1>Register page</h1>
-
+    <br>
 
     <form class="form-signin" action="<spring:url value="/jsp/register" />" method="POST">
         <h2 class="form-signin-heading">Registration</h2>

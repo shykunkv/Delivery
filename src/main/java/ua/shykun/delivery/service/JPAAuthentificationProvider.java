@@ -29,8 +29,8 @@ public class JPAAuthentificationProvider implements AuthenticationProvider {
         String passwd = auth.getCredentials().toString();
         User user = userService.findByLogin(login);
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        //if (user != null && encoder.matches(passwd, user.getPassword())) {
-        if (user != null && passwd.equals(user.getPassword())) {
+        if (user != null && encoder.matches(passwd, user.getPassword())) {
+        //if (user != null && passwd.equals(user.getPassword())) {
             List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
             for (UserRole role : user.getUserRoles()) {
                 grantedAuthorities.add(new SimpleGrantedAuthority(role.toString()));
