@@ -11,16 +11,28 @@ import java.util.List;
 
 
 @Controller
+@SessionAttributes("message")
 public class HelloController {
 
     @Autowired
     private PizzaService pizzaService;
 
-    @RequestMapping(value = "/hello", method = RequestMethod.GET)
-    public String hello(Model model) {
-        model.addAttribute("message", "Hello world");
-        return "hello";
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String home() {
+        return "home";
     }
+
+//    @ModelAttribute("message")
+//    public String getString() {
+//        return new String("Hello");
+//
+//    }
+
+//    @RequestMapping(value = "/hello", method = RequestMethod.GET)
+//    public String hello(Model model) {
+//        return "hello";
+//    }
+
 
     @RequestMapping(value = "/menu", method = RequestMethod.GET)
     public String menu(Model model) {
@@ -31,19 +43,32 @@ public class HelloController {
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String newPizza(Model model) {
+        Pizza.PizzaType[] types = Pizza.PizzaType.values();
+        model.addAttribute("types", types);
         return "new_pizza";
     }
 
-    @RequestMapping(value = "/pizza", method = RequestMethod.GET)
-    @ResponseBody
-    public String viewPizzaById(Model model, @RequestParam(name = "id") Long pizzaId) {
-        Pizza pizza = pizzaService.find(pizzaId);
-        return pizza.toString();
-    }
-
     @RequestMapping(value = "/addnew", method = RequestMethod.POST)
-    public String addNewPizza(@ModelAttribute Pizza pizza) {
+    public String addNewPizza(@ModelAttribute(value = "pizza") Pizza pizza) {
+        System.out.println(pizza);
         pizzaService.save(pizza);
         return "redirect:menu";
     }
+
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    public String editPizza(@RequestParam("id") Long pizzaId, Model model) {
+        Pizza pizza = pizzaService.find(pizzaId);
+        Pizza.PizzaType[] types = Pizza.PizzaType.values();
+        model.addAttribute("types", types);
+        model.addAttribute("pizza", pizza);
+        return "new_pizza";
+    }
+
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    public String deletePizza(@RequestParam("id") Long pizzaId) {
+        Pizza pizza = pizzaService.find(pizzaId);
+        pizzaService.delete(pizza);
+        return "redirect:menu";
+    }
+
 }

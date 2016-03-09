@@ -1,26 +1,19 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Admin
-  Date: 2/24/16
-  Time: 14:06
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<html>
-<head>
-    <title>Menu</title>
-</head>
-<body>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<center>
+<br>
+
     <h3>PizzaDelivery Menu</h3>
 
-    <table border="1" width="300">
+
+    <table  border="1">
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Price</th>
+                <th width="50">ID</th>
+                <th width="150">Name</th>
+                <th width="150">Type</th>
+                <th width="75">Price</th>
+                <th width="50"></th>
+                <th width="50"></th>
             </tr>
         </thead>
 
@@ -31,9 +24,24 @@
                     <td>${pizza.name}</td>
                     <td>${pizza.type}</td>
                     <td>${pizza.price}</td>
+                    <td>
+                        <form action="edit" method="post">
+                            <input type="hidden" name="id" value="${pizza.id}" />
+                            <input type="submit" name="edit" value="edit"/>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="delete" method="post">
+                            <input type="hidden" name="id" value="${pizza.id}" />
+                            <input type="submit" name="delete" value="delete"/>
+                        </form>
+                    </td>
                 </tr>
             </c:forEach>
         </tbody>
     </table>
-</body>
-</html>
+
+    </br>
+    <a href="/jsp/create">Create new pizza</a>
+</center>
+

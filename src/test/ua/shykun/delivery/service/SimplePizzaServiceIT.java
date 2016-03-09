@@ -45,10 +45,10 @@ public class SimplePizzaServiceIT extends AbstractTransactionalJUnit4SpringConte
     private EntityManager em;
 
 
-    @Test
-    public void testFind() throws Exception {
-        System.out.println("FIND");
-//        final String sql = "INSERT INTO " +
+//    @Test
+//    public void testFind() throws Exception {
+//        System.out.println("FIND");
+////        final String sql = "INSERT INTO " +
 //                           "pizzas (pizza_name, pizza_price, pizza_type)" +
 //                           "VALUES ('NAME', '100.0', 'MEAT')";
 //
@@ -65,22 +65,22 @@ public class SimplePizzaServiceIT extends AbstractTransactionalJUnit4SpringConte
 //
 //        Long id = keyHolder.getKey().longValue();
 
-        Pizza pizza = new Pizza("TESTNAME", 100.0, Pizza.PizzaType.MEAT);
-        Pizza result = pizzaService.save(pizza);
-        em.flush();
+//        Pizza pizza = new Pizza("TESTNAME", 100.0, Pizza.PizzaType.MEAT);
+//        Pizza result = pizzaService.save(pizza);
+//        em.flush();
+//
+//        assertNotNull(pizzaService.find(result.getId()));
+//
+//    }
 
-        assertNotNull(pizzaService.find(result.getId()));
-
-    }
-
-    @Test
-    public void testSave() throws Exception {
-        System.out.println("SAVE");
-        Pizza pizza = new Pizza("TESTNAME", 100.0, Pizza.PizzaType.MEAT);
-
-        Pizza result = pizzaService.save(pizza);
-        em.flush();
-        System.out.println(result.getId());
-        assertNotNull(pizza.getId());
-    }
+//    @Test
+//    public void testSave() throws Exception {
+//        System.out.println("SAVE");
+//        Pizza pizza = new Pizza("TESTNAME", 100.0, Pizza.PizzaType.MEAT);
+//
+//        Pizza result = pizzaService.save(pizza);
+//        em.flush();
+//        System.out.println(result.getId());
+//        assertNotNull(pizza.getId());
+//    }
 }

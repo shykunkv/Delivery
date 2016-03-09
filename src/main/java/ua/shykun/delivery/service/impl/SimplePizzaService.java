@@ -35,4 +35,10 @@ public class SimplePizzaService implements PizzaService {
     public List<Pizza> findAll() {
         return pizzaRepository.getAll();
     }
+
+    @Override
+    @Transactional
+    public void delete(Pizza pizza) {
+        pizzaRepository.delete(pizza);
+    }
 }

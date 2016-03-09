@@ -23,7 +23,7 @@ public class Customer {
 
     @ManyToMany
     @JoinColumn(referencedColumnName = "address_id")
-    @Cascade({CascadeType.PERSIST, CascadeType.MERGE})
+    @Cascade(CascadeType.ALL)
     @Column(name = "customer_addresses")
     private List<Address> addresses;
 

@@ -37,4 +37,9 @@ public class JPAPizzaRepository implements PizzaRepository {
     public List<Pizza> getAll() {
         return em.createQuery("from Pizza").getResultList();
     }
+
+    @Override
+    public void delete(Pizza pizza) {
+        em.remove(em.contains(pizza) ? pizza : em.merge(pizza));
+    }
 }

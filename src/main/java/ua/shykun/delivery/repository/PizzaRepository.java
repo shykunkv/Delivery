@@ -8,4 +8,5 @@ public interface PizzaRepository {
     Pizza find(Long id);
     Pizza save(Pizza pizza);
     List<Pizza> getAll();
+    void delete(Pizza pizza);
 }
